@@ -7,294 +7,385 @@ import '../styles/global.css';
   <meta charset="utf-8" />
   <title>跨越时空的数字传承</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body class="bg-[#0a0a0a] text-stone-300 antialiased font-sans overflow-x-hidden selection:bg-[#5c4a3d] selection:text-[#e8decf]">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      cursor: none; 
+      font-family: 'Jost', sans-serif;
+      background: #080808; 
+    }
+    ::selection { background: #5c4a3d; color: #e8decf; }
 
-  <svg class="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.12] mix-blend-overlay">
-    <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" /></filter>
+    .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+    .font-serif-en { font-family: 'Cormorant Garamond', serif; font-style: italic; }
+
+    #cursor-ring {
+      position: fixed; top: 0; left: 0; z-index: 9999;
+      width: 4px; height: 4px; 
+      border: 1px solid rgba(232, 222, 207, 0); 
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s cubic-bezier(0.23,1,0.32,1), height 0.6s cubic-bezier(0.23,1,0.32,1), border-color 0.6s;
+    }
+    body.show-cursor #cursor-ring {
+      width: 24px; height: 24px; 
+      border-color: rgba(232, 222, 207, 0.2); 
+    }
+    body:has(button:hover) #cursor-ring, body:has(a:hover) #cursor-ring {
+      width: 48px; height: 48px;
+      border-color: rgba(232, 222, 207, 0.4);
+      background: rgba(232, 222, 207, 0.05);
+    }
+
+    .architectural-text {
+      -webkit-text-stroke: 1px rgba(232,222,207,0.05); 
+      color: transparent;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .magnetic-btn {
+      position: relative;
+      padding: 1.5rem 4rem;
+      background: transparent;
+      border: 1px solid rgba(232,222,207,0.15);
+      color: #e8decf;
+      border-radius: 9999px;
+      font-size: 0.65rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      transition: border-color 0.8s ease;
+      overflow: hidden;
+      cursor: none; 
+    }
+    .magnetic-btn:hover { border-color: #5c4a3d; }
+  </style>
+</head>
+
+<body class="text-stone-300 antialiased overflow-x-hidden">
+
+  <audio id="ambient-sound" loop preload="auto">
+    <source src="/ambient.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="cursor-ring"></div>
+
+  <div id="scroll-progress" class="fixed top-0 left-0 z-[200] h-[1px] w-0 bg-gradient-to-r from-transparent via-[#5c4a3d] to-[#e8decf] transition-all duration-75"></div>
+
+  <svg class="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.008] mix-blend-overlay">
+    <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" /></filter>
     <rect width="100%" height="100%" filter="url(#noise)" />
   </svg>
 
-  <div class="fixed inset-0 pointer-events-none z-50 overflow-hidden mix-blend-screen">
-    <div class="ambient-fog absolute -top-[50%] -left-[50%] w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,rgba(232,222,207,0.015)_0%,transparent_50%)]"></div>
-    
-    <div class="dust-particles absolute inset-0"></div>
+  <canvas id="dust-canvas" class="fixed inset-0 z-40 pointer-events-none opacity-0 transition-opacity duration-[4000ms]"></canvas>
+
+  <div id="entrance-veil" class="fixed inset-0 z-[100] bg-[#0a0a0a] flex flex-col items-center justify-center transition-all duration-[3000ms]" style="opacity:1">
+    <p class="font-serif-en text-[#5c4a3d] tracking-[0.2em] text-xl mb-4 animate-pulse">Please slow down.</p>
+    <p class="text-stone-600 tracking-[1.5em] text-[0.65rem] uppercase animate-pulse ml-3">· 请 · 慢 · 下 · 来 ·</p>
   </div>
 
   <main class="w-full">
 
-    <audio id="ambient-sound" loop preload="auto">
-      <source src="/ambient.mp3" type="audio/mpeg">
-    </audio>
-
-    <div id="entrance-veil" class="fixed inset-0 z-[100] bg-[#0a0a0a] flex items-center justify-center cursor-pointer transition-opacity duration-[3000ms]">
-      <p class="text-stone-600 tracking-[0.5em] text-sm uppercase animate-pulse">Click to enter the space</p>
-    </div>
-
-    <section id="sec-1" class="h-screen w-full flex flex-col items-center justify-center bg-[#0a0a0a] relative">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(232,222,207,0.03)_0%,transparent_70%)]"></div>
-      <h1 class="hero-title text-[12vw] leading-none font-serif opacity-0 blur-2xl text-[#e8decf]">流动。</h1>
-      <p class="hero-subtitle text-xs tracking-[1em] mt-12 opacity-0 blur-xl text-stone-500 uppercase">A Digital Sanctuary</p>
+    <section id="sec-1" class="h-screen w-full flex flex-col items-center justify-end pb-[18vh] bg-[#080808] relative overflow-hidden">
+      <div id="heroGlow" class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(232,222,207,0.06)_0%,transparent_70%)] pointer-events-none blur-[120px]" style="opacity:0; transform: scale(1.2);"></div>
+      <h1 id="heroTitle" class="hero-el font-serif-sc text-[9vw] leading-none text-[#e8decf] relative z-10" style="opacity:0; filter:blur(40px);">流动。</h1>
+      <p id="heroSub" class="hero-el text-[0.6rem] tracking-[1.2em] mt-12 text-stone-500 uppercase relative z-10" style="opacity:0; filter:blur(40px);">stillness in motion</p>
     </section>
 
-    <section class="h-[40vh] w-full bg-[#0a0a0a] flex justify-center items-center">
-      <div class="w-[1px] h-32 bg-stone-800 opacity-50"></div>
-    </section>
-
-    <section id="sec-2" class="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden py-32">
-      <div class="absolute inset-0 opacity-40 pointer-events-none z-0">
-        <img src="/old-site.jpg" class="w-full h-full object-cover grayscale blur-sm" />
-        <div class="absolute inset-0 bg-[#0a0a0a]/60"></div>
+    <section id="sec-2" class="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden py-32 bg-[#0a0a0a]">
+      <div class="absolute inset-0 opacity-20 pointer-events-none z-0">
+        <img src="/old-site.jpg" loading="lazy" class="w-full h-full object-cover grayscale blur-sm" />
+        <div class="absolute inset-0 bg-[#0a0a0a]/80"></div>
       </div>
-      
       <div class="relative z-10 w-full max-w-4xl px-8">
-        <div class="sec2-item mb-32 opacity-0 blur-xl translate-y-8">
-          <h3 class="text-[8vw] leading-none font-serif text-[#5c4a3d]">重叠</h3>
-          <p class="text-sm tracking-widest text-stone-400 mt-4 ml-2">底层的负重，让数字的生命逐渐沉睡。</p>
+        <div class="sec2-item mb-40 text-left" style="opacity:0; filter:blur(24px); transform: translateY(30px);">
+          <h3 class="font-serif-sc text-[7vw] leading-none text-[#5c4a3d]">重叠。</h3>
+          <p class="text-[0.65rem] tracking-[0.5em] text-stone-700 mt-6 uppercase">代码堆叠的负重</p>
         </div>
-        <div class="sec2-item mb-32 opacity-0 blur-xl translate-y-8 text-right">
-          <h3 class="text-[8vw] leading-none font-serif text-stone-500">断裂</h3>
-          <p class="text-sm tracking-widest text-stone-400 mt-4 mr-2">每一次白屏的等待，都是对宁静的打扰。</p>
+        <div class="sec2-item text-right" style="opacity:0; filter:blur(24px); transform: translateY(30px);">
+          <h3 class="font-serif-sc text-[7vw] leading-none text-stone-600">断裂。</h3>
+          <p class="text-[0.65rem] tracking-[0.5em] text-stone-700 mt-6 uppercase">物理跳转的迷途</p>
         </div>
       </div>
     </section>
 
-    <section class="h-[50vh] w-full bg-[#0a0a0a] relative overflow-hidden flex justify-center items-center">
-       <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] to-stone-100"></div>
-    </section>
-
-    <section id="sec-3" class="h-[150vh] w-full flex flex-col items-center justify-center bg-stone-100 relative overflow-hidden">
-      <div class="absolute inset-0 opacity-20 pointer-events-none">
-        <img src="/plum-village.jpg" class="parallax-bg w-full h-[120%] object-cover grayscale mix-blend-multiply" />
+    <section id="sec-3" class="h-[150vh] w-full flex flex-col items-center justify-center bg-[#0d0d0d] relative overflow-hidden">
+      <div class="absolute inset-0 opacity-40 pointer-events-none">
+        <img src="/plum-village.jpg" loading="lazy" class="parallax-bg w-full h-[120%] object-cover grayscale mix-blend-lighten" />
       </div>
-
-      <div class="z-10 text-center px-8 relative mix-blend-difference text-stone-200">
-        <h2 class="sec3-title text-[8vw] leading-tight font-serif opacity-0 blur-2xl">克制即是<br/>无限</h2>
-      </div>
-    </section>
-
-    <section id="sec-5" class="h-screen w-full bg-[#0a0a0a] overflow-hidden relative">
-      <div class="horizontal-scroll-container flex w-[300vw] h-full">
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent z-10 pointer-events-none"></div>
+      
+      <div class="z-20 text-center px-8 relative text-stone-200">
         
-        <div class="panel w-screen h-full relative flex flex-col justify-center overflow-hidden">
-          <img src="/new-prototype-1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-10 mix-blend-luminosity scale-125 origin-bottom-left" />
-          <h2 class="cinematic-text absolute -left-12 top-24 text-[40vw] font-serif leading-none text-transparent [-webkit-text-stroke:2px_rgba(232,222,207,0.15)] select-none pointer-events-none">网</h2>
-          <div class="relative z-10 px-32 mt-32">
-             <h3 class="text-3xl font-serif text-[#e8decf] tracking-widest mb-4">不该只是点击。</h3>
-             <p class="text-stone-600 tracking-[0.3em] uppercase text-xs">A Space Beyond Interactions</p>
+        <div class="overflow-hidden mb-8">
+          <p class="sec3-line text-[#5c4a3d] tracking-[0.5em] text-xs uppercase">Industry Benchmark · 行业视觉标杆</p>
+        </div>
+
+        <h2 class="font-serif-sc text-[6vw] leading-loose">
+          <div class="overflow-hidden py-2"><div class="sec3-line">克制即是</div></div>
+          <div class="overflow-hidden py-2"><div class="sec3-line text-[#5c4a3d]">无限。</div></div>
+        </h2>
+
+        <div class="overflow-hidden mt-8">
+          <p class="sec3-line text-stone-500 tracking-[0.2em] text-xs leading-relaxed uppercase">以“梅村”平台为参照<br/>探索真正宁静的数字场域</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="h-[80vh] w-full bg-[#0a0a0a] relative flex items-center justify-center pointer-events-none overflow-hidden">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full md:w-3/4 h-[80vh] bg-gradient-to-b from-[#e8decf]/8 via-transparent to-transparent blur-[140px] mix-blend-screen"></div>
+      <p class="text-stone-700/30 tracking-[2em] text-[0.55rem] uppercase ml-6 z-10">Silence</p>
+    </section>
+
+    <section id="sec-5" class="h-screen w-full bg-[#090909] overflow-hidden relative">
+      <div id="hContainer" class="flex w-[300vw] h-full will-change-transform">
+        
+        <div class="h-panel w-screen h-full relative flex flex-col justify-center px-24">
+          <img src="/new-prototype-1.jpg" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-10 mix-blend-luminosity scale-105 origin-bottom-left" />
+          <h2 class="architectural-text font-serif-sc absolute -left-[20vw] top-[10%] text-[45vw] leading-none">网</h2>
+          <div class="relative z-10 px-8 md:px-32 mt-32">
+             <h3 class="text-2xl md:text-4xl font-serif-sc text-[#e8decf] tracking-widest">不该只是点击。</h3>
           </div>
         </div>
 
-        <div class="panel w-screen h-full relative flex items-center justify-end px-32 overflow-hidden">
-          <img src="/new-prototype-2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-overlay scale-125 origin-top-right" />
-          <h2 class="cinematic-text absolute -right-12 bottom-12 text-[40vw] font-serif leading-none text-transparent [-webkit-text-stroke:2px_rgba(232,222,207,0.15)] select-none pointer-events-none">页</h2>
-          <div class="relative z-10 text-right">
-             <h3 class="text-3xl font-serif text-[#e8decf] tracking-widest mb-4">而是时间的无声流淌。</h3>
-             <p class="text-stone-600 tracking-[0.3em] uppercase text-xs">Continuity of the mind</p>
+        <div class="h-panel w-screen h-full relative flex items-center justify-end px-24 text-right">
+          <img src="/new-prototype-2.jpg" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-overlay scale-105 origin-top-right" />
+          <h2 class="architectural-text font-serif-sc absolute -right-[20vw] bottom-[10%] text-[45vw] leading-none">页</h2>
+          <div class="relative z-10 px-8 md:px-32">
+             <h3 class="text-2xl md:text-4xl font-serif-sc text-[#e8decf] tracking-widest">而是……</h3>
           </div>
         </div>
 
-        <div class="panel w-screen h-full relative flex items-center justify-center">
-          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0a0a0a_80%)] z-10"></div>
-          <img src="/new-prototype-3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 scale-110 origin-center" />
-          <h2 class="relative z-20 text-[5vw] font-serif tracking-[0.5em] text-[#e8decf] opacity-80 mix-blend-screen drop-shadow-2xl">隐于无形</h2>
+        <div class="h-panel w-screen h-full relative flex items-center justify-center">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#090909_80%)] z-10 pointer-events-none"></div>
+          <img src="/new-prototype-3.jpg" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-15 scale-100 origin-center" />
+          <h2 class="relative z-20 text-[3vw] font-serif-sc tracking-[0.8em] text-[#e8decf] opacity-80 mix-blend-screen drop-shadow-2xl">时间本身。</h2>
+          
+          <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center opacity-40 animate-pulse">
+             <div class="w-[1px] h-16 bg-gradient-to-b from-stone-400 to-transparent"></div>
+          </div>
         </div>
 
       </div>
     </section>
 
-    <section class="h-[40vh] w-full bg-[#0a0a0a]"></section>
+    <section id="sec-pause" class="h-[120vh] w-full bg-[#0a0a0a] flex items-center justify-center relative overflow-hidden">
+        <p class="pause-text text-stone-600 tracking-[1.5em] text-[0.6rem] uppercase ml-3" style="opacity:0">然后，一切开始安静。</p>
+    </section>
 
-    <section id="sec-6" class="h-screen w-full bg-[#0a0a0a] relative overflow-hidden">
-        
-        <div class="era-1 absolute inset-0 flex items-center justify-center z-10 bg-[#0a0a0a] px-8 md:px-24">
+    <section id="sec-6" class="h-screen w-full bg-[#050505] relative overflow-hidden">
+        <div class="era-1 absolute inset-0 flex items-center justify-center z-10 bg-[#050505] px-8 md:px-24">
           <div class="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between gap-16 md:gap-32">
-            <div class="w-full md:w-3/5 aspect-video overflow-hidden rounded-sm opacity-60 shadow-2xl relative border border-white/10">
-              <img src="/old-site.jpg" class="w-full h-full object-cover grayscale" alt="旧站" />
+            <div class="w-full md:w-3/5 aspect-video overflow-hidden rounded-sm opacity-30 relative border border-white/5">
+              <img src="/old-site.jpg" loading="lazy" class="w-full h-full object-cover grayscale" />
             </div>
             <div class="w-full md:w-2/5 text-left">
-              <h2 class="text-5xl font-serif text-[#e8decf] tracking-widest drop-shadow-lg">第一代</h2>
-              <h3 class="text-2xl font-serif text-stone-500 mt-4 tracking-widest">沉重的巨石</h3>
-              <div class="w-8 h-[1px] bg-stone-700 my-8"></div>
-              <p class="text-stone-400 tracking-[0.2em] text-sm uppercase leading-loose">代码堆叠的负重<br/>让数字生命逐渐沉睡</p>
+              <h2 class="text-3xl font-serif-sc text-stone-500 tracking-widest">第一代</h2>
+              <div class="w-8 h-[1px] bg-stone-800 my-8"></div>
+              <p class="text-stone-600 tracking-[0.5em] text-sm uppercase">沉重。</p>
             </div>
           </div>
         </div>
         
-        <div class="era-2 absolute inset-0 flex items-center justify-center z-20 bg-[#0a0a0a] opacity-0 translate-y-12 px-8 md:px-24">
+        <div class="era-2 absolute inset-0 flex items-center justify-center z-20 bg-[#050505] px-8 md:px-24" style="opacity:0; filter:blur(20px);">
           <div class="w-full max-w-7xl flex flex-col md:flex-row-reverse items-center justify-between gap-16 md:gap-32">
-            <div class="w-full md:w-3/5 aspect-video overflow-hidden rounded-sm opacity-70 shadow-2xl relative border border-white/10">
-              <img src="/plum-village.jpg" class="w-full h-full object-cover grayscale mix-blend-luminosity" alt="梅村标杆" />
+            <div class="w-full md:w-3/5 aspect-video overflow-hidden rounded-sm opacity-40 relative border border-white/5">
+              <img src="/plum-village.jpg" loading="lazy" class="w-full h-full object-cover grayscale mix-blend-luminosity" />
             </div>
             <div class="w-full md:w-2/5 text-right">
-              <h2 class="text-5xl font-serif text-[#e8decf] tracking-widest drop-shadow-lg">第二代</h2>
-              <h3 class="text-2xl font-serif text-stone-500 mt-4 tracking-widest">仍被页面束缚</h3>
+              <h2 class="text-3xl font-serif-sc text-[#e8decf] tracking-widest">第二代</h2>
               <div class="w-8 h-[1px] bg-stone-700 my-8 ml-auto"></div>
-              <p class="text-stone-400 tracking-[0.2em] text-sm uppercase leading-loose">传统 CMS 的物理跳转<br/>打断了每一次宁静流转</p>
+              <p class="text-stone-500 tracking-[0.5em] text-sm uppercase">割裂。</p>
             </div>
           </div>
         </div>
 
-        <div class="era-3 absolute inset-0 flex flex-col items-center justify-center z-30 bg-[#0a0a0a] opacity-0 translate-y-12">
-           <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(232,222,207,0.08)_0%,transparent_60%)] pointer-events-none"></div>
-           <h2 class="text-6xl md:text-8xl font-serif text-[#e8decf] tracking-[0.3em] mb-8 drop-shadow-2xl">Astro 孤岛架构</h2>
-           <p class="text-[#5c4a3d] tracking-[0.3em] uppercase text-xl">体验，终于消失于技术本身。</p>
+        <div class="era-3 absolute inset-0 flex flex-col items-center justify-center z-30 bg-[#0a0a0a]" style="opacity:0; filter:blur(20px);">
+           <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(232,222,207,0.03)_0%,transparent_50%)] pointer-events-none blur-[60px]"></div>
+           <h2 class="font-serif-sc text-[5vw] text-[#e8decf] tracking-[0.3em] mb-8 drop-shadow-2xl">Astro 孤岛架构</h2>
+           <p class="text-[#5c4a3d] tracking-[0.5em] uppercase text-xs">终于，消失了。</p>
         </div>
-
     </section>
 
     <section id="sec-7" class="h-screen w-full flex flex-col items-center justify-center bg-[#0a0a0a] relative overflow-hidden">
-      <div class="ceremonial-line w-[1px] h-0 bg-stone-700 mb-16"></div>
-      <button class="sec7-btn opacity-0 blur-md px-12 py-5 bg-transparent border border-stone-700 text-stone-400 rounded-full text-xs hover:bg-stone-800 hover:text-[#e8decf] transition-all duration-1000 tracking-[0.4em] uppercase">
-        进入数字空间
-      </button>
+      <div id="cerLine" class="w-[1px] h-0 bg-gradient-to-b from-transparent via-[#5c4a3d] to-transparent mb-16"></div>
+      
+      <div id="btnWrap" class="magnetic-btn-wrap relative inline-flex" style="opacity:0; filter:blur(10px);">
+        <button id="ctaBtn" class="magnetic-btn">进入数字空间</button>
+      </div>
     </section>
 
   </main>
 
-<script>
+  <script>
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
     import Lenis from '@studio-freight/lenis';
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // ==========================================
-    // 0. 【新补上的代码】统一全局动作系统
-    // ==========================================
-    const MOTION = {
-      slow: 3.5,     // 极其缓慢的电影级时间
-      medium: 2.0,   // 标准叙事时间
-      ease: "sine.inOut" // 无机械感的呼吸曲线
-    };
+	// ============================================
+    // 0. 统一初始状态 (解决 FOUC 闪屏与卡死风险)
+    // ============================================
+    gsap.set('.hero-el', { opacity: 0, y: 20 });
+    gsap.set('.sec2-item', { opacity: 0, y: 30 });
+    gsap.set('.sec3-line', { yPercent: 110 }); // 确保文字初始躲在裁剪框下面
+    gsap.set('.pause-text', { opacity: 0 });
+    gsap.set('.era-2', { opacity: 0, filter: 'blur(20px)' });
+    gsap.set('.era-3', { opacity: 0, filter: 'blur(20px)', y: 30 });
+    gsap.set('#btnWrap', { opacity: 0, filter: 'blur(10px)' });
 
-    // ==========================================
-    // 1. 初始化 Lenis
-    // ==========================================
-    const lenis = new Lenis({
-      duration: 2.0, 
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smooth: true,
-    });
+
+    const lenis = new Lenis({ duration: 2.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0);
 
-    // ==========================================
-    // 2. 动态重力引擎 (Variable Physics)
-    // ==========================================
     ScrollTrigger.create({
-      trigger: "#sec-2",
-      start: "top center",
-      end: "bottom center",
-      onEnter: () => lenis.options.duration = 3.5, 
-      onLeave: () => lenis.options.duration = 2.0, 
-      onEnterBack: () => lenis.options.duration = 3.5,
-      onLeaveBack: () => lenis.options.duration = 2.0
+      trigger: "#sec-2", start: "top center", end: "bottom center",
+      onEnter: () => lenis.options.duration = 3.5, onLeave: () => lenis.options.duration = 2.2, 
+      onEnterBack: () => lenis.options.duration = 3.5, onLeaveBack: () => lenis.options.duration = 2.2
     });
-
     ScrollTrigger.create({
-      trigger: "#sec-5",
-      start: "top center",
-      end: "bottom center",
-      onEnter: () => lenis.options.duration = 1.0, 
-      onLeave: () => lenis.options.duration = 2.0,
-      onEnterBack: () => lenis.options.duration = 1.0,
-      onLeaveBack: () => lenis.options.duration = 2.0
+      trigger: "#sec-5", start: "top center", end: "bottom center",
+      onEnter: () => lenis.options.duration = 1.4, onLeave: () => lenis.options.duration = 2.2,
+      onEnterBack: () => lenis.options.duration = 1.4, onLeaveBack: () => lenis.options.duration = 2.2
     });
 
-    // ==========================================
-    // 3. 声音与空间入口系统 (修复版开场)
-    // ==========================================
-    const veil = document.getElementById('entrance-veil');
-    const ambientSound = document.getElementById('ambient-sound');
-
-    // 只有在点击屏幕后，才开始播放声音和浮现文字
-    veil.addEventListener('click', () => {
-        // 渐隐黑色的帷幕
-        veil.style.opacity = '0';
-        setTimeout(() => veil.style.display = 'none', 3000);
-        
-        // 尝试播放低频空间音 (如果你还没有放 ambient.mp3，这里可能会在控制台有个小警告，但不影响画面)
-        if(ambientSound) {
-            ambientSound.volume = 0;
-            let playPromise = ambientSound.play();
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    gsap.to(ambientSound, { volume: 0.3, duration: 5, ease: "none" });
-                }).catch(error => {
-                    console.log("音频播放被拦截或文件不存在，但不影响视觉表现。");
-                });
-            }
-        }
-        
-        // 真正触发第一幕的对焦动画
-        gsap.to(".hero-title", { opacity: 1, filter: "blur(0px)", duration: 3, ease: "sine.inOut" });
-        gsap.to(".hero-subtitle", { opacity: 1, filter: "blur(0px)", duration: 3, ease: "sine.inOut", delay: 1 });
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      if (progressBar) progressBar.style.width = (window.scrollY / total * 100) + '%';
     });
 
-    // ==========================================
-    // 4. 其他章节的 GSAP 动画逻辑
-    // ==========================================
-    
-    // --- 痛点：深渊里的回音 ---
-    gsap.utils.toArray(".sec2-item").forEach((item: any, i) => {
-      gsap.to(item, {
-        scrollTrigger: { trigger: item, start: "top 75%" },
-        opacity: 1, y: 0, filter: "blur(0px)", duration: MOTION.slow, ease: MOTION.ease
-      });
-    });
+    const body = document.body;
+    const ring = document.getElementById('cursor-ring');
+    let mx = window.innerWidth/2, my = window.innerHeight/2;
+    let rx = mx, ry = my;
+    let entered = false;
 
-    // --- 梅村标杆：仰望感 ---
-    gsap.to(".parallax-bg", {
-      scrollTrigger: { trigger: "#sec-3", start: "top bottom", end: "bottom top", scrub: true },
-      y: 200, ease: "none"
-    });
-    gsap.to(".sec3-title", {
-      scrollTrigger: { trigger: "#sec-3", start: "top 60%" },
-      opacity: 1, filter: "blur(0px)", duration: MOTION.slow, ease: MOTION.ease
-    });
-
-    // --- 横向画卷：空间漫游 ---
-    const panels = gsap.utils.toArray(".panel");
-    gsap.to(".horizontal-scroll-container", {
-      xPercent: -100 * (panels.length - 1),
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#sec-5", pin: true, scrub: 2, end: "+=4000" 
+    document.addEventListener('mousemove', e => {
+      body.classList.add('show-cursor');
+      mx = e.clientX; my = e.clientY;
+      if (entered) {
+        const px = (mx / window.innerWidth - 0.5) * 40;
+        const py = (my / window.innerHeight - 0.5) * 20;
+        gsap.to('#heroTitle', { x: px * -1, y: py * -1, duration: 2, ease: 'power2.out' });
+        gsap.to('#heroSub', { x: px * 0.5, y: py * 0.5, duration: 2.5, ease: 'power2.out' });
       }
     });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.08; ry += (my - ry) * 0.08;
+      if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    const canvas = document.getElementById('dust-canvas') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let particlesRunning = false;
+
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      x: number; y: number; size: number; speedX: number; speedY: number; opacity: number; life: number; decay: number;
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.2 + 0.3; this.speedX = (Math.random() - 0.5) * 0.15; this.speedY = -Math.random() * 0.2 - 0.05;
+        this.opacity = Math.random() * 0.02; this.life = 1; this.decay = Math.random() * 0.001 + 0.0005;
+      }
+      update() { this.x += this.speedX; this.y += this.speedY; this.life -= this.decay; if (this.life <= 0) this.reset(); }
+      draw() {
+        if (!ctx) return;
+        ctx.save(); ctx.globalAlpha = this.opacity * this.life; ctx.fillStyle = '#e8decf';
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+      }
+    }
+    for (let i = 0; i < 35; i++) particles.push(new Particle());
+
+    function animateParticles() {
+      if(!ctx || !particlesRunning) return; 
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); }); 
+      requestAnimationFrame(animateParticles);
+    }
+
+    const veil = document.getElementById('entrance-veil');
+    const ambientSound = document.getElementById('ambient-sound') as HTMLAudioElement;
+
+    veil?.addEventListener('click', () => {
+      if (entered) return; entered = true;
+      
+      gsap.to(veil, { opacity: 0, duration: 2.5, ease: 'power2.inOut', onComplete: () => { veil.style.display = 'none'; } });
+      
+      if(ambientSound) {
+        ambientSound.volume = 0;
+        let playPromise = ambientSound.play();
+        if (playPromise !== undefined) { playPromise.then(_ => { gsap.to(ambientSound, { volume: 0.3, duration: 5, ease: "none" }); }).catch(() => {}); }
+      }
+      
+      canvas.classList.remove('opacity-0');
+      particlesRunning = true; animateParticles();
+      gsap.to('#heroGlow', { opacity: 1, scale: 1, duration: 5, ease: "power1.out", delay: 0.5 });
+      gsap.to('.hero-el', { opacity: 1, filter: 'blur(0px)', duration: 4.5, ease: 'sine.inOut', stagger: 1.5, delay: 1.2 });
+    });
+
+    gsap.utils.toArray(".sec2-item").forEach((item: any, i) => {
+      gsap.to(item, { scrollTrigger: { trigger: item, start: "top 75%" }, opacity: 1, y: 0, filter: "blur(0px)", duration: 2.5, ease: "sine.out", delay: i*0.2 });
+    });
+
+    gsap.to(".parallax-bg", { scrollTrigger: { trigger: "#sec-3", start: "top bottom", end: "bottom top", scrub: true }, y: 150, ease: "none" });
+    gsap.to(".sec3-line", { scrollTrigger: { trigger: "#sec-3", start: "top 60%" }, yPercent: 0, duration: 1.4, ease: "power4.out", stagger: 0.45 });
+
+    // 核心修复2：缩短横向距离，降低卡顿感 (从 +=2200 缩短到 +=1200)，阻尼 scrub 降低为 1
+    const panels = gsap.utils.toArray(".h-panel");
+    const hScrollTl = gsap.timeline({ scrollTrigger: { trigger: "#sec-5", pin: true, scrub: 1, end: "+=1200" } });
+    hScrollTl.to("#hContainer", { xPercent: -100 * (panels.length - 1), ease: "none" });
+
     panels.forEach((panel: any) => {
-      gsap.to(panel.querySelector("img"), {
-        scale: 1, ease: "none",
-        scrollTrigger: {
-          trigger: panel, containerAnimation: gsap.getById("horizontal"),
-          start: "left right", end: "right left", scrub: true
-        }
-      });
+      const img = panel.querySelector("img");
+      if(img) gsap.to(img, { scale: 1, ease: "none", scrollTrigger: { trigger: panel, containerAnimation: hScrollTl, start: "left right", end: "right left", scrub: true } });
     });
 
-    // --- 第六幕：三代文明更迭 (画廊错位版) ---
-    const sec6Tl = gsap.timeline({
-      scrollTrigger: { trigger: "#sec-6", start: "top top", end: "+=3000", scrub: 1, pin: true }
-    });
+    // 触发呼吸段低语 (略微提前触发)
+    gsap.to(".pause-text", { scrollTrigger: { trigger: "#sec-pause", start: "top 75%" }, opacity: 1, duration: 3, ease: "sine.inOut" });
+
+    const sec6Tl = gsap.timeline({ scrollTrigger: { trigger: "#sec-6", start: "top top", end: "+=2500", scrub: 1, pin: true } });
+    gsap.to(".era-1 img", { scale: 1.05, ease: "none", scrollTrigger: { trigger: "#sec-6", start: "top top", end: "+=2500", scrub: true } });
     
-    gsap.to(".era-1 img", { scale: 1.1, ease: "none", scrollTrigger: { trigger: "#sec-6", start: "top top", end: "+=3000", scrub: true } });
-    gsap.to(".era-2 img", { scale: 1.1, ease: "none", scrollTrigger: { trigger: "#sec-6", start: "top top", end: "+=3000", scrub: true } });
-
     sec6Tl
-      .to(".era-1", { opacity: 0, filter: "blur(15px)", y: -50, duration: 1 })
-      .to(".era-2", { opacity: 1, y: 0, filter: "blur(0px)", duration: 1 }, "-=0.5")
-      .to(".era-2", { opacity: 1, duration: 0.5 }) 
-      .to(".era-2", { opacity: 0, filter: "blur(15px)", y: -50, duration: 1 })
-      .to(".era-3", { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.5 }, "-=0.5");
+      .to(".era-1", { opacity: 0, duration: 0.1, ease: "none" }) 
+      .to({}, { duration: 0.8 }) 
+      .to(".era-2", { opacity: 1, filter: "blur(0px)", duration: 2.5, ease: "sine.inOut" }) 
+      .to(".era-2", { opacity: 1, duration: 1 }) 
+      .to(".era-2", { opacity: 0, filter: "blur(20px)", duration: 1.5 })
+      .to(".era-3", { opacity: 1, filter: "blur(0px)", duration: 2.5 }, "-=0.5");
 
-    // --- 终章：仪式感 ---
+    // 核心修复3：找回丢失的金线动画
     const sec7Tl = gsap.timeline({ scrollTrigger: { trigger: "#sec-7", start: "top 60%" } });
-    sec7Tl.to(".ceremonial-line", { height: "20vh", duration: MOTION.slow, ease: MOTION.ease })
-          .to(".sec7-btn", { opacity: 1, filter: "blur(0px)", duration: MOTION.medium, ease: MOTION.ease }, "-=1.5");
+    sec7Tl.to("#cerLine", { height: "15vh", duration: 2.5, ease: "sine.inOut" })
+          .to("#btnWrap", { opacity: 1, filter: "blur(0px)", duration: 2, ease: "sine.out" }, "-=1.0");
 
-</script>
-  
+    const btnWrap = document.getElementById('btnWrap');
+    const ctaBtn = document.getElementById('ctaBtn');
+    btnWrap?.addEventListener('mousemove', e => {
+      const rect = btnWrap.getBoundingClientRect();
+      const dx = e.clientX - rect.left - rect.width / 2; const dy = e.clientY - rect.top - rect.height / 2;
+      const pull = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / 150);
+      gsap.to(ctaBtn, { x: dx * pull * 0.5, y: dy * pull * 0.5, duration: 0.6, ease: 'power2.out' });
+      ctaBtn?.style.setProperty('--mx', (e.clientX - rect.left) / rect.width * 100 + '%');
+      ctaBtn?.style.setProperty('--my', (e.clientY - rect.top) / rect.height * 100 + '%');
+    });
+    btnWrap?.addEventListener('mouseleave', () => { gsap.to(ctaBtn, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.4)' }); });
+
+  </script>
 </body>
 </html>
