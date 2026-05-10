@@ -1,0 +1,383 @@
+---
+// Proposal.astro
+import '../styles/global.css';
+---
+
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <title>数字基建升级提案</title>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased font-sans">
+
+  <main class="w-full overflow-hidden">
+
+    <section id="sec-1" class="h-screen w-full flex flex-col items-center justify-center bg-[#e8decf]">
+      <h1 class="hero-title text-5xl font-serif mb-4 opacity-0 blur-xl translate-y-4">从静态之美到流动之韵</h1>
+      <p class="hero-subtitle text-xl tracking-widest opacity-0">以现代前端科技赋能数字纪念馆</p>
+    </section>
+
+    <section id="sec-2" class="h-screen w-full flex flex-col items-center justify-center bg-[#2a241f] text-white px-8 relative overflow-hidden">
+      
+      <div class="absolute inset-0 opacity-20 pointer-events-none">
+        <img src="/old-site.jpg" alt="旧站现状" class="w-full h-full object-cover grayscale blur-sm mix-blend-luminosity" />
+      </div>
+      
+      <div class="relative z-10 flex flex-col items-center w-full">
+        <h2 class="sec2-title text-4xl font-serif mb-12 opacity-0 translate-y-10">现有架构诊断与性能瓶颈</h2>
+        
+        <div class="flex flex-col gap-6 w-full max-w-3xl">
+          <div class="sec2-item opacity-0 translate-y-10 bg-[#5c4a3d]/40 p-6 rounded-lg backdrop-blur-md border border-white/10 shadow-2xl">
+            <h3 class="text-2xl font-serif mb-2 text-[#e8decf]">1. 核心技术堆叠</h3>
+            <p class="text-stone-300 text-lg">底层框架重叠，产生严重技术债与系统负重。</p>
+          </div>
+          <div class="sec2-item opacity-0 translate-y-10 bg-[#5c4a3d]/40 p-6 rounded-lg backdrop-blur-md border border-white/10 shadow-2xl">
+            <h3 class="text-2xl font-serif mb-2 text-[#e8decf]">2. 移动端加载沉重</h3>
+            <p class="text-stone-300 text-lg">冗余代码阻碍渲染，频繁出现白屏等待现象。</p>
+          </div>
+          <div class="sec2-item opacity-0 translate-y-10 bg-[#5c4a3d]/40 p-6 rounded-lg backdrop-blur-md border border-white/10 shadow-2xl">
+            <h3 class="text-2xl font-serif mb-2 text-[#e8decf]">3. 交互体验生硬</h3>
+            <p class="text-stone-300 text-lg">旧式组件老化，导致跳转卡顿，破坏沉浸式阅读状态。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-3" class="h-[120vh] w-full flex flex-col items-center justify-center bg-stone-100 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-30">
+       <img src="/plum-village.jpg" alt="梅村标杆" class="parallax-bg w-full h-full object-cover grayscale mix-blend-multiply" />
+      </div>
+
+      <div class="z-10 text-center px-8">
+        <h2 class="sec3-title text-5xl font-serif mb-16 opacity-0">视觉美学标杆对标</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+          <div class="sec3-item opacity-0">
+            <h3 class="text-xl font-medium mb-4 text-stone-600 uppercase tracking-widest">— 呼吸感 —</h3>
+            <p class="text-stone-500 leading-relaxed text-lg">极佳的呼吸留白与排版，为文字赋予宁静的空间。</p>
+          </div>
+          <div class="sec3-item opacity-0">
+            <h3 class="text-xl font-medium mb-4 text-stone-600 uppercase tracking-widest">— 克制美 —</h3>
+            <p class="text-stone-500 leading-relaxed text-lg">宁静克制的大地色系，营造超越时间的数字人文质感。</p>
+          </div>
+          <div class="sec3-item opacity-0">
+            <h3 class="text-xl font-medium mb-4 text-stone-600 uppercase tracking-widest">— 数字化 —</h3>
+            <p class="text-stone-500 leading-relaxed text-lg">画册般的排版视觉，将法师的智慧转化为有温度的阅读体验。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-4" class="h-screen w-full flex items-center justify-center bg-[#e8decf] relative overflow-hidden">
+      <div class="container mx-auto px-8 flex flex-col md:flex-row items-center gap-16">
+        
+        <div class="w-full md:w-1/2">
+          <h2 class="sec4-title text-5xl font-serif mb-8 opacity-0 -translate-x-20">新世代 Astro<br/>孤岛架构</h2>
+          <p class="sec4-p text-stone-600 text-xl leading-relaxed mb-8 opacity-0 -translate-x-20">
+            告别传统“全量加载”的臃肿。像智能家居精准供暖一样，Astro 只在需要交互的局部激活代码。
+          </p>
+        </div>
+
+        <div class="w-full md:w-1/2 sec4-visual opacity-0 translate-x-20">
+           <div class="relative w-64 h-64 mx-auto">
+              <div class="absolute top-0 right-0 w-32 h-32 bg-[#5c4a3d] rounded-2xl flex items-center justify-center text-white font-serif shadow-2xl">互动岛</div>
+              <div class="absolute bottom-4 left-0 w-40 h-40 bg-white rounded-2xl flex items-center justify-center text-[#5c4a3d] border border-stone-200 shadow-xl">极简静态区</div>
+              <div class="absolute -bottom-8 -right-4 w-24 h-24 bg-stone-300 rounded-full flex items-center justify-center text-sm uppercase tracking-tighter">零延迟</div>
+           </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="sec-5" class="h-screen w-full bg-[#1c1917] text-[#e8decf] overflow-hidden relative">
+      
+      <div class="horizontal-scroll-container flex w-[300vw] h-full">
+        
+        <div class="panel w-screen h-full flex items-center justify-center px-24 gap-16 border-r border-white/5 relative">
+          <div class="w-1/2 h-[60vh] overflow-hidden rounded-sm shadow-2xl">
+            <img src="/new-prototype-1.jpg" alt="新站原型设计" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000" />
+          </div>
+          <div class="w-1/2">
+            <div class="text-[#5c4a3d] text-8xl font-serif mb-4 opacity-50">01</div>
+            <h2 class="text-5xl font-serif mb-6 leading-tight">电影级交互与<br/>动态流转</h2>
+            <p class="text-stone-400 text-xl tracking-wide leading-relaxed">打破传统网页的扁平感。基于 Astro 孤岛架构的极速性能，我们引入顶级动效引擎，创造出带有景深的沉浸式空间感。</p>
+          </div>
+        </div>
+
+        <div class="panel w-screen h-full flex items-center justify-center px-24 gap-16 border-r border-white/5 relative">
+          <div class="w-1/2 text-right">
+            <div class="text-[#5c4a3d] text-8xl font-serif mb-4 opacity-50">02</div>
+            <h2 class="text-5xl font-serif mb-6 leading-tight">如墨迹晕染般<br/>自然浮现</h2>
+            <p class="text-stone-400 text-xl tracking-wide leading-relaxed">彻底告别生硬的模块弹出。法师的文字与历史足迹，将随着用户的每一次鼠标滚动，像墨迹一样在屏幕上缓缓流淌。</p>
+          </div>
+          <div class="w-1/2 h-[70vh] overflow-hidden rounded-sm shadow-2xl">
+             <img src="/new-prototype-2.jpg" alt="新站原型设计2" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000" />
+          </div>
+        </div>
+
+        <div class="panel w-screen h-full flex flex-col items-center justify-center px-12 relative">
+          <div class="w-full max-w-4xl h-[50vh] overflow-hidden rounded-sm shadow-2xl mb-12 relative">
+            <img src="/new-prototype-3.jpg" alt="沉浸式体验" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1c1917] to-transparent"></div>
+          </div>
+          <div class="text-center relative z-10 -mt-20">
+            <h2 class="text-6xl font-serif mb-4">无缝沉浸体验</h2>
+            <p class="text-stone-400 text-xl tracking-widest">消除跳转白屏，让数字浏览成为一场宁静的心灵之旅。</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="sec-6" class="min-h-screen w-full flex flex-col items-center justify-center bg-stone-100 text-stone-800 py-32 px-8 relative z-10">
+      
+      <h2 class="sec6-title text-5xl font-serif mb-4 opacity-0 translate-y-10">免疫级防御与综合评估</h2>
+      <p class="sec6-subtitle text-xl text-stone-500 mb-16 opacity-0 translate-y-10 tracking-widest">摆脱漏洞，物理隔绝，打造十年免维护的数字磐石</p>
+
+      <div class="sec6-table w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden opacity-0 translate-y-10">
+        
+        <div class="grid grid-cols-4 bg-stone-200 border-b border-stone-300 text-sm font-bold tracking-wider">
+          <div class="p-6 text-stone-500">对比维度</div>
+          <div class="p-6 text-stone-400">第一代 (旧站)</div>
+          <div class="p-6 text-stone-400">第二代 (梅村标杆)</div>
+          <div class="p-6 bg-[#5c4a3d] text-[#e8decf] relative overflow-hidden">
+            <div class="relative z-10">第三代 (Astro+GSAP)</div>
+            <div class="shine-effect absolute top-0 left-[-100%] w-1/2 h-full bg-white/20 skew-x-[-20deg]"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-4 border-b border-stone-100 text-stone-600 hover:bg-stone-50 transition-colors">
+          <div class="p-6 font-medium">核心架构</div>
+          <div class="p-6">Vue+jQuery 混搭</div>
+          <div class="p-6">传统 WordPress</div>
+          <div class="p-6 bg-[#e8decf]/30 font-bold text-[#5c4a3d]">Astro 孤岛架构</div>
+        </div>
+
+        <div class="grid grid-cols-4 border-b border-stone-100 text-stone-600 hover:bg-stone-50 transition-colors">
+          <div class="p-6 font-medium">沉浸感体验</div>
+          <div class="p-6">加载卡顿生硬</div>
+          <div class="p-6">点击整体刷新/白屏</div>
+          <div class="p-6 bg-[#e8decf]/30 font-bold text-[#5c4a3d]">电影级无缝切页</div>
+        </div>
+
+        <div class="grid grid-cols-4 text-stone-600 hover:bg-stone-50 transition-colors">
+          <div class="p-6 font-medium">防御与寿命</div>
+          <div class="p-6">代码老化，负重高</div>
+          <div class="p-6">插件漏洞，需频繁维护</div>
+          <div class="p-6 bg-[#e8decf]/30 font-bold text-[#5c4a3d]">纯静态，防篡改，免维护</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="sec-7" class="h-screen w-full flex flex-col items-center justify-center bg-[#e8decf] relative overflow-hidden">
+      
+      <div class="ceremonial-line w-px h-0 bg-[#5c4a3d] mb-12 opacity-50"></div>
+      
+      <h2 class="sec7-title text-5xl md:text-7xl font-serif text-[#5c4a3d] mb-6 opacity-0">跨越时空的数字传承</h2>
+      <p class="sec7-subtitle text-2xl text-stone-600 tracking-widest mb-16 opacity-0">顶尖科技与东方禅意的融合</p>
+      
+      <button class="sec7-btn opacity-0 translate-y-10 px-12 py-5 bg-[#5c4a3d] text-[#e8decf] rounded-full text-lg hover:bg-stone-800 transition-all duration-300 tracking-widest shadow-2xl hover:shadow-xl hover:-translate-y-1 cursor-pointer">
+        PROJECT KICKOFF / 正式启航
+      </button>
+
+    </section>
+
+  </main>
+
+</body>
+<script>
+
+  import Lenis from '@studio-freight/lenis'
+
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // 极其平滑的曲线
+  smooth: true
+})
+
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+requestAnimationFrame(raf)
+
+  // 导入 GSAP 和 ScrollTrigger
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  
+  // 注册插件
+  gsap.registerPlugin(ScrollTrigger);
+
+  // --- 第一幕：开场动画 ---
+  // 当页面加载时，让隐藏的标题慢慢升起并显示
+  window.addEventListener("DOMContentLoaded", () => {
+    gsap.to(".hero-title", {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)", // 核心魔法：从 blur-xl 缓慢对焦到清晰 (0px)
+    duration: 3,         // 导演指令：时间拉长到 3 秒，极度克制、缓慢
+    ease: "sine.inOut",  // 放弃 out 回弹，使用 sine.inOut 让起步和收尾都如丝般顺滑
+    delay: 0.5
+  });
+
+    gsap.to(".hero-subtitle", {
+      opacity: 1,
+      y: 0,
+      duration: 3,
+      ease: "power3.out",
+      delay: 0.5 // 比主标题晚一点点出来，更有层次
+    });
+
+	// --- 第二幕：痛点揭示 (ScrollTrigger 滚动触发) ---
+  
+  // 1. 让标题先出来
+  gsap.to(".sec2-title", {
+    scrollTrigger: {
+      trigger: "#sec-2",
+      start: "top 70%", // 当 Section 2 顶部到达屏幕高度的 70% 时触发
+    },
+    opacity: 1,
+    y: 0,
+    duration: 2,
+    ease: "power2.out"
+  });
+
+  // 2. 让三个痛点卡片依次砸下来
+  gsap.to(".sec2-item", {
+    scrollTrigger: {
+      trigger: "#sec-2",
+      start: "top 50%", // 当 Section 2 顶部到达屏幕中线时触发卡片动画
+    },
+    opacity: 1,
+    y: 0,
+    duration: 2,
+    stagger: 0.3, // 核心魔法：每张卡片延迟 0.3 秒出现，形成连续的阶梯感
+    ease: "power2.out"
+  });
+
+  // --- 第三幕：梅村美学 (视差与浮现) ---
+  
+ // 背景图片的视差效果
+  gsap.to(".parallax-bg", {
+    scrollTrigger: {
+      trigger: "#sec-3",
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true
+    },
+    y: 150, // 让图片有位移
+    ease: "none"
+  });
+
+  gsap.to(".sec3-title", {
+    scrollTrigger: {
+      trigger: "#sec-3",
+      start: "top 60%",
+    },
+    opacity: 1,
+    y: -20,
+    duration: 2
+  });
+
+  gsap.to(".sec3-item", {
+    scrollTrigger: {
+      trigger: "#sec-3",
+      start: "top 50%",
+    },
+    opacity: 1,
+    y: -30,
+    duration: 2,
+    stagger: 0.2
+  });
+
+  // --- 第四幕：Astro 破局 (横向滑入) ---
+
+  const sec4Tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#sec-4",
+      start: "top 60%",
+    }
+  });
+
+  sec4Tl.to(".sec4-title, .sec4-p", {
+    opacity: 1,
+    x: 0,
+    duration: 2,
+    stagger: 0.2,
+    ease: "power2.out"
+  })
+  .to(".sec4-visual", {
+    opacity: 1,
+    x: 0,
+    duration: 2,
+    ease: "power2.out" // 带一点点回弹感，显得生动
+  }, "-=0.5"); // 提前 0.5 秒开始，让衔接更流畅
+  });
+
+  // --- 第五幕：横向画卷 (全场最高潮) ---
+  
+  // 获取横向容器里面的所有 panel (画卷)
+  const panels = gsap.utils.toArray(".panel");
+
+  // 将整个容器向左侧移动 (移动距离等于: 容器总宽度 - 一个屏幕的宽度)
+  gsap.to(".horizontal-scroll-container", {
+    xPercent: -100 * (panels.length - 1), 
+    ease: "none", // 必须是 none，这样滚动起来才匀速丝滑
+    scrollTrigger: {
+      trigger: "#sec-5",
+      pin: true,     // 核心魔法：把屏幕钉住！不要让页面继续往下滑了
+      scrub: 1,      // 擦除效果：动画进度与滚轮绑定，加一点点延迟(1秒)显得极其顺滑
+      end: "+=2000"  // 用户需要向下滚动 2000 像素，才能看完这个横向动画
+    }
+  });
+
+  // --- 第六幕：图穷匕见 (对比表与金光扫过) ---
+  
+  const sec6Tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#sec-6",
+      start: "top 60%", // 滚到 60% 触发
+    }
+  });
+
+  // 标题和表格依次浮现
+  sec6Tl.to(".sec6-title, .sec6-subtitle, .sec6-table", {
+    opacity: 1,
+    y: 0,
+    duration: 2,
+    stagger: 0.2,
+    ease: "power3.out"
+  })
+  // 核心魔法：表格出来后，给 Astro 那一列闪过一道极其高级的“微光”
+  .to(".shine-effect", {
+    left: "200%",
+    duration: 2.4,
+    ease: "power2.inOut"
+  }, "-=0.2"); // 稍微提前一点点亮
+
+  // --- 第七幕：圆满收盘 (线条生长与文字升起) ---
+
+  const sec7Tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#sec-7",
+      start: "top 50%",
+    }
+  });
+
+  // 线条像香火或时间线一样缓缓向下生长
+  sec7Tl.to(".ceremonial-line", {
+    height: "120px",
+    duration: 3,
+    ease: "power2.inOut"
+  })
+  // 文字和按钮庄重地浮现
+  .to(".sec7-title, .sec7-subtitle, .sec7-btn", {
+    opacity: 1,
+    y: 0,
+    duration: 2.4,
+    stagger: 0.3,
+    ease: "power3.out"
+  }, "-=0.5");
+</script>
+</html>

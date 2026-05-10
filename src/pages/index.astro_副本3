@@ -1,0 +1,238 @@
+---
+import '../styles/global.css';
+---
+
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <title>跨越时空的数字传承</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body class="bg-[#0a0a0a] text-stone-300 antialiased font-sans overflow-x-hidden selection:bg-[#5c4a3d] selection:text-[#e8decf]">
+
+  <svg class="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.12] mix-blend-overlay">
+    <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" /></filter>
+    <rect width="100%" height="100%" filter="url(#noise)" />
+  </svg>
+
+  <main class="w-full">
+
+    <section id="sec-1" class="h-screen w-full flex flex-col items-center justify-center bg-[#0a0a0a] relative">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(232,222,207,0.03)_0%,transparent_70%)]"></div>
+      <h1 class="hero-title text-[12vw] leading-none font-serif opacity-0 blur-2xl text-[#e8decf]">流动。</h1>
+      <p class="hero-subtitle text-xs tracking-[1em] mt-12 opacity-0 blur-xl text-stone-500 uppercase">A Digital Sanctuary</p>
+    </section>
+
+    <section class="h-[40vh] w-full bg-[#0a0a0a] flex justify-center items-center">
+      <div class="w-[1px] h-32 bg-stone-800 opacity-50"></div>
+    </section>
+
+    <section id="sec-2" class="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden py-32">
+      <div class="absolute inset-0 opacity-40 pointer-events-none z-0">
+        <img src="/old-site.jpg" class="w-full h-full object-cover grayscale blur-sm" />
+        <div class="absolute inset-0 bg-[#0a0a0a]/60"></div>
+      </div>
+      
+      <div class="relative z-10 w-full max-w-4xl px-8">
+        <div class="sec2-item mb-32 opacity-0 blur-xl translate-y-8">
+          <h3 class="text-[8vw] leading-none font-serif text-[#5c4a3d]">重叠</h3>
+          <p class="text-sm tracking-widest text-stone-400 mt-4 ml-2">底层的负重，让数字的生命逐渐沉睡。</p>
+        </div>
+        <div class="sec2-item mb-32 opacity-0 blur-xl translate-y-8 text-right">
+          <h3 class="text-[8vw] leading-none font-serif text-stone-500">断裂</h3>
+          <p class="text-sm tracking-widest text-stone-400 mt-4 mr-2">每一次白屏的等待，都是对宁静的打扰。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="h-[50vh] w-full bg-[#0a0a0a] relative overflow-hidden flex justify-center items-center">
+       <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] to-stone-100"></div>
+    </section>
+
+    <section id="sec-3" class="h-[150vh] w-full flex flex-col items-center justify-center bg-stone-100 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-20 pointer-events-none">
+        <img src="/plum-village.jpg" class="parallax-bg w-full h-[120%] object-cover grayscale mix-blend-multiply" />
+      </div>
+
+      <div class="z-10 text-center px-8 relative mix-blend-difference text-stone-200">
+        <h2 class="sec3-title text-[8vw] leading-tight font-serif opacity-0 blur-2xl">克制即是<br/>无限</h2>
+      </div>
+    </section>
+
+    <section id="sec-5" class="h-screen w-full bg-[#0a0a0a] overflow-hidden relative">
+      <div class="horizontal-scroll-container flex w-[300vw] h-full">
+        
+        <div class="panel w-screen h-full relative flex flex-col justify-center px-24">
+          <img src="/new-prototype-1.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 scale-110 transform origin-center" />
+          <h2 class="cinematic-text relative z-10 text-[10vw] font-serif leading-none text-[#e8decf]">网页</h2>
+          <p class="cinematic-text relative z-10 text-xl tracking-[0.5em] text-stone-500 mt-8 ml-2">不该只是点击与跳转。</p>
+        </div>
+
+        <div class="panel w-screen h-full relative flex flex-col justify-center items-end px-24 text-right">
+          <img src="/new-prototype-2.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 scale-110 transform origin-center" />
+          <h2 class="cinematic-text relative z-10 text-[10vw] font-serif leading-none text-[#e8decf]">时间</h2>
+          <p class="cinematic-text relative z-10 text-xl tracking-[0.5em] text-stone-500 mt-8 mr-2">它应当像水一样，无声流淌。</p>
+        </div>
+
+        <div class="panel w-screen h-full relative flex items-center justify-center">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a] z-10"></div>
+          <img src="/new-prototype-3.jpg" class="absolute inset-0 w-full h-full object-cover opacity-30 scale-110 transform origin-center" />
+          <h2 class="cinematic-text relative z-20 text-[6vw] font-serif tracking-[0.2em] text-[#e8decf]">空间与精神的融合。</h2>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="h-[40vh] w-full bg-[#0a0a0a]"></section>
+
+    <section id="sec-6" class="h-screen w-full bg-[#0a0a0a] relative overflow-hidden">
+        
+        <div class="era-1 absolute inset-0 flex items-center justify-center z-10 bg-[#0a0a0a] px-8 md:px-24">
+          <div class="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between gap-16 md:gap-32">
+            <div class="w-full md:w-3/5 aspect-video overflow-hidden rounded-sm opacity-60 shadow-2xl relative border border-white/10">
+              <img src="/old-site.jpg" class="w-full h-full object-cover grayscale" alt="旧站" />
+            </div>
+            <div class="w-full md:w-2/5 text-left">
+              <h2 class="text-5xl font-serif text-[#e8decf] tracking-widest drop-shadow-lg">第一代</h2>
+              <h3 class="text-2xl font-serif text-stone-500 mt-4 tracking-widest">沉重的巨石</h3>
+              <div class="w-8 h-[1px] bg-stone-700 my-8"></div>
+              <p class="text-stone-400 tracking-[0.2em] text-sm uppercase leading-loose">代码堆叠的负重<br/>让数字生命逐渐沉睡</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="era-2 absolute inset-0 flex items-center justify-center z-20 bg-[#0a0a0a] opacity-0 translate-y-12 px-8 md:px-24">
+          <div class="w-full max-w-7xl flex flex-col md:flex-row-reverse items-center justify-between gap-16 md:gap-32">
+            <div class="w-full md:w-3/5 aspect-video overflow-hidden rounded-sm opacity-70 shadow-2xl relative border border-white/10">
+              <img src="/plum-village.jpg" class="w-full h-full object-cover grayscale mix-blend-luminosity" alt="梅村标杆" />
+            </div>
+            <div class="w-full md:w-2/5 text-right">
+              <h2 class="text-5xl font-serif text-[#e8decf] tracking-widest drop-shadow-lg">第二代</h2>
+              <h3 class="text-2xl font-serif text-stone-500 mt-4 tracking-widest">仍被页面束缚</h3>
+              <div class="w-8 h-[1px] bg-stone-700 my-8 ml-auto"></div>
+              <p class="text-stone-400 tracking-[0.2em] text-sm uppercase leading-loose">传统 CMS 的物理跳转<br/>打断了每一次宁静流转</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="era-3 absolute inset-0 flex flex-col items-center justify-center z-30 bg-[#0a0a0a] opacity-0 translate-y-12">
+           <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(232,222,207,0.08)_0%,transparent_60%)] pointer-events-none"></div>
+           <h2 class="text-6xl md:text-8xl font-serif text-[#e8decf] tracking-[0.3em] mb-8 drop-shadow-2xl">Astro 孤岛架构</h2>
+           <p class="text-[#5c4a3d] tracking-[0.3em] uppercase text-xl">体验，终于消失于技术本身。</p>
+        </div>
+
+    </section>
+
+    <section id="sec-7" class="h-screen w-full flex flex-col items-center justify-center bg-[#0a0a0a] relative overflow-hidden">
+      <div class="ceremonial-line w-[1px] h-0 bg-stone-700 mb-16"></div>
+      <button class="sec7-btn opacity-0 blur-md px-12 py-5 bg-transparent border border-stone-700 text-stone-400 rounded-full text-xs hover:bg-stone-800 hover:text-[#e8decf] transition-all duration-1000 tracking-[0.4em] uppercase">
+        进入数字空间
+      </button>
+    </section>
+
+  </main>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import Lenis from '@studio-freight/lenis';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // --- 统一全局动作系统 (Motion System) ---
+    const MOTION = {
+      slow: 3.5,     // 极其缓慢的电影级时间
+      medium: 2.0,   // 标准叙事时间
+      ease: "sine.inOut" // 无机械感的呼吸曲线
+    };
+
+    // --- Lenis 平滑滚动 ---
+    const lenis = new Lenis({
+      duration: 2.0, // 增加阻尼，让滚动极具“重量感”
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+
+    // --- 序幕：空灵出场 ---
+    window.addEventListener("DOMContentLoaded", () => {
+      gsap.to(".hero-title", { opacity: 1, filter: "blur(0px)", duration: MOTION.slow, ease: MOTION.ease, delay: 0.5 });
+      gsap.to(".hero-subtitle", { opacity: 1, filter: "blur(0px)", duration: MOTION.slow, ease: MOTION.ease, delay: 1.5 });
+    });
+
+    // --- 痛点：深渊里的回音 ---
+    gsap.utils.toArray(".sec2-item").forEach((item: any, i) => {
+      gsap.to(item, {
+        scrollTrigger: { trigger: item, start: "top 75%" },
+        opacity: 1, y: 0, filter: "blur(0px)", duration: MOTION.slow, ease: MOTION.ease
+      });
+    });
+
+    // --- 梅村标杆：仰望感 ---
+    gsap.to(".parallax-bg", {
+      scrollTrigger: { trigger: "#sec-3", start: "top bottom", end: "bottom top", scrub: true },
+      y: 200, ease: "none"
+    });
+    gsap.to(".sec3-title", {
+      scrollTrigger: { trigger: "#sec-3", start: "top 60%" },
+      opacity: 1, filter: "blur(0px)", duration: MOTION.slow, ease: MOTION.ease
+    });
+
+    // --- 横向画卷：空间漫游 ---
+    const panels = gsap.utils.toArray(".panel");
+    gsap.to(".horizontal-scroll-container", {
+      xPercent: -100 * (panels.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#sec-5", pin: true, scrub: 2, end: "+=4000" // scrub设为2，产生像水底漫步的极大延迟感
+      }
+    });
+    panels.forEach((panel: any) => {
+      gsap.to(panel.querySelector("img"), {
+        scale: 1, ease: "none",
+        scrollTrigger: {
+          trigger: panel, containerAnimation: gsap.getById("horizontal"),
+          start: "left right", end: "right left", scrub: true
+        }
+      });
+    });
+
+    // --- 第六幕：三代文明更迭 (画廊错位版) ---
+    const sec6Tl = gsap.timeline({
+      scrollTrigger: { 
+        trigger: "#sec-6", 
+        start: "top top", 
+        end: "+=3000", // 滚动的距离拉长，让客户有时间欣赏排版
+        scrub: 1, 
+        pin: true 
+      }
+    });
+    
+    // 给 Era 1 和 Era 2 里面的图片加上缓慢放大的“呼吸感”
+    gsap.to(".era-1 img", { scale: 1.1, ease: "none", scrollTrigger: { trigger: "#sec-6", start: "top top", end: "+=3000", scrub: true } });
+    gsap.to(".era-2 img", { scale: 1.1, ease: "none", scrollTrigger: { trigger: "#sec-6", start: "top top", end: "+=3000", scrub: true } });
+
+    sec6Tl
+      // 滚出第一代
+      .to(".era-1", { opacity: 0, filter: "blur(15px)", y: -50, duration: 1 })
+      
+      // 滚入第二代
+      .to(".era-2", { opacity: 1, y: 0, filter: "blur(0px)", duration: 1 }, "-=0.5")
+      // 停留阅读时间
+      .to(".era-2", { opacity: 1, duration: 0.5 }) 
+      // 滚出第二代
+      .to(".era-2", { opacity: 0, filter: "blur(15px)", y: -50, duration: 1 })
+      
+      // 第三代（Astro）降临，用极大的反差感
+      .to(".era-3", { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.5 }, "-=0.5");
+
+    // --- 终章：仪式感 ---
+    const sec7Tl = gsap.timeline({ scrollTrigger: { trigger: "#sec-7", start: "top 60%" } });
+    sec7Tl.to(".ceremonial-line", { height: "20vh", duration: MOTION.slow, ease: MOTION.ease })
+          .to(".sec7-btn", { opacity: 1, filter: "blur(0px)", duration: MOTION.medium, ease: MOTION.ease }, "-=1.5");
+
+  </script>
+</body>
+</html>

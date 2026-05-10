@@ -1,0 +1,16 @@
+/* global.css */
+@import "tailwindcss";
+
+.dust-particles {
+  background-image: 
+    radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 100px 100px, 150px 150px;
+  background-position: 0 0, 50px 50px;
+  animation: drift 60s linear infinite;
+}
+
+@keyframes drift {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-150px) translateX(-50px); }
+}
