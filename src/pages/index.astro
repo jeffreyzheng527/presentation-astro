@@ -228,12 +228,10 @@ import '../styles/global.css';
 
     gsap.registerPlugin(ScrollTrigger);
 
-	// ============================================
-    // 0. 统一初始状态 (解决 FOUC 闪屏与卡死风险)
-    // ============================================
+
     gsap.set('.hero-el', { opacity: 0, y: 20 });
     gsap.set('.sec2-item', { opacity: 0, y: 30 });
-    gsap.set('.sec3-line', { yPercent: 110 }); // 确保文字初始躲在裁剪框下面
+    gsap.set('.sec3-line', { yPercent: 110 }); 
     gsap.set('.pause-text', { opacity: 0 });
     gsap.set('.era-2', { opacity: 0, filter: 'blur(20px)' });
     gsap.set('.era-3', { opacity: 0, filter: 'blur(20px)', y: 30 });
@@ -345,7 +343,6 @@ import '../styles/global.css';
     gsap.to(".parallax-bg", { scrollTrigger: { trigger: "#sec-3", start: "top bottom", end: "bottom top", scrub: true }, y: 150, ease: "none" });
     gsap.to(".sec3-line", { scrollTrigger: { trigger: "#sec-3", start: "top 60%" }, yPercent: 0, duration: 1.4, ease: "power4.out", stagger: 0.45 });
 
-    // 核心修复2：缩短横向距离，降低卡顿感 (从 +=2200 缩短到 +=1200)，阻尼 scrub 降低为 1
     const panels = gsap.utils.toArray(".h-panel");
     const hScrollTl = gsap.timeline({ scrollTrigger: { trigger: "#sec-5", pin: true, scrub: 1, end: "+=1200" } });
     hScrollTl.to("#hContainer", { xPercent: -100 * (panels.length - 1), ease: "none" });
@@ -355,7 +352,6 @@ import '../styles/global.css';
       if(img) gsap.to(img, { scale: 1, ease: "none", scrollTrigger: { trigger: panel, containerAnimation: hScrollTl, start: "left right", end: "right left", scrub: true } });
     });
 
-    // 触发呼吸段低语 (略微提前触发)
     gsap.to(".pause-text", { scrollTrigger: { trigger: "#sec-pause", start: "top 75%" }, opacity: 1, duration: 3, ease: "sine.inOut" });
 
     const sec6Tl = gsap.timeline({ scrollTrigger: { trigger: "#sec-6", start: "top top", end: "+=2500", scrub: 1, pin: true } });
@@ -369,7 +365,6 @@ import '../styles/global.css';
       .to(".era-2", { opacity: 0, filter: "blur(20px)", duration: 1.5 })
       .to(".era-3", { opacity: 1, filter: "blur(0px)", duration: 2.5 }, "-=0.5");
 
-    // 核心修复3：找回丢失的金线动画
     const sec7Tl = gsap.timeline({ scrollTrigger: { trigger: "#sec-7", start: "top 60%" } });
     sec7Tl.to("#cerLine", { height: "15vh", duration: 2.5, ease: "sine.inOut" })
           .to("#btnWrap", { opacity: 1, filter: "blur(0px)", duration: 2, ease: "sine.out" }, "-=1.0");
